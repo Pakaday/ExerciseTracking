@@ -82,7 +82,7 @@ public class Main {
         System.out.println("Enter exercise name: ");
         String name = scanner.nextLine();
 
-        System.out.println("Enter exercise duration: ");
+        System.out.println("Enter exercise duration in minutes: ");
         int duration = scanner.nextInt();
 
         System.out.println("Calories burned: ");
