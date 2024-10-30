@@ -1,6 +1,4 @@
-import model.User;
-import model.Exercise;
-import model.ActivityLog;
+import model.*;
 
 import java.util.Scanner;
 
@@ -11,6 +9,17 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
+
+        // Load existing user
+        System.out.println("Enter name to load profile:");
+        String name = scanner.nextLine();
+        user = UserDatabaseHandler.getUser(name);
+
+        if (user != null) {
+            System.out.println("Profile loaded successfully");
+        } else {
+            System.out.println("No profile found.");
+        }
 
         while (running) {
             System.out.println("\nExercise Tracker");
@@ -65,15 +74,23 @@ public class Main {
 
         // Store in user
         user = new User(name, age, weight, height);
+        // Save user to database before message
+        UserDatabaseHandler.saveUser(user);
         System.out.println("Profile created successfully.");
+
     }
 
     private static void viewUserProfile() {
         if (user == null) {
             System.out.println("No profile found. Please create a new profile.");
         } else {
-//            System.out.println("\nUser Profile:");
-            user.displayUserInfo();
+            User dbUser = UserDatabaseHandler.getUser(user.getName());
+            if (dbUser != null) {
+                dbUser.displayUserInfo();
+            } else {
+                System.out.println("User not found.");
+            }
+//            user.displayUserInfo();
         }
     }
 
@@ -91,7 +108,9 @@ public class Main {
         // Create new exercise object
         Exercise exercise = new Exercise(name, duration, caloriesBurned);
         activityLog.addExercise(exercise);
+        ExerciseDatabaseHandler.saveExercise(exercise);
         System.out.println("Exercise logged successfully!");
+
     }
 
     private static void viewExerciseLog() {
