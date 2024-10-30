@@ -2,7 +2,7 @@ package model;
 
 public class Exercise {
     private String name;
-    private int duration;
+    private int duration; // Duration in minutes
     private double caloriesBurned;
 
     public Exercise(String name, int duration, double caloriesBurned) {
@@ -25,7 +25,7 @@ public class Exercise {
 
     public void displayExerciseInfo() {
         System.out.println("Exercise Name: " + name);
-        System.out.println("Duration: " + duration);
+        System.out.println("Duration: " + duration + " minutes");
         System.out.println("Calories burned: " + caloriesBurned + " kcal");
     }
 }

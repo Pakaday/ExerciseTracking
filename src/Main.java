@@ -1,12 +1,12 @@
 import model.User;
 import model.Exercise;
+import model.ActivityLog;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     private static User user = null;
-    private static ArrayList<Exercise> exerciseLog = new ArrayList<>();
+    private static ActivityLog activityLog = new ActivityLog();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -90,19 +90,11 @@ public class Main {
 
         // Create new exercise object
         Exercise exercise = new Exercise(name, duration, caloriesBurned);
-        exerciseLog.add(exercise);
+        activityLog.addExercise(exercise);
         System.out.println("Exercise logged successfully!");
     }
 
     private static void viewExerciseLog() {
-        if (exerciseLog.isEmpty()) {
-            System.out.println("No exercises logged yet.");
-        } else {
-            System.out.println("\nExercise Log:");
-            for (Exercise exercise : exerciseLog) {
-                exercise.displayExerciseInfo();
-                System.out.println();
-            }
+        activityLog.displayExercise();
         }
     }
-}
