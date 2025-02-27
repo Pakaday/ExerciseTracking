@@ -107,13 +107,18 @@ public class Main {
 
         // Create new exercise object
         Exercise exercise = new Exercise(name, duration, caloriesBurned);
-        activityLog.addExercise(exercise);
+//        activityLog.addExercise(exercise);
         ExerciseDatabaseHandler.saveExercise(exercise);
         System.out.println("Exercise logged successfully!");
 
     }
 
     private static void viewExerciseLog() {
+        activityLog.clearLog(); // Clear current log to avoid duplicates
+        // Retrieve exercises from database and add to activitylog
+        for (Exercise exercise : ExerciseDatabaseHandler.getAllExercises()) {
+            activityLog.addExercise(exercise);
+        }
         activityLog.displayExercise();
         }
     }
